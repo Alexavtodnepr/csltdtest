@@ -1,0 +1,166 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+
+}
+
+table {
+  width: 100%;
+}
+
+.clicked-row {
+  background-color: rgba(128, 128, 128, 0.3);
+  font-weight: bold;
+}
+
+.data-name{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+tr{
+  cursor: pointer;
+}
+
+.block-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 600px;
+  font-size: 24px;
+}
+.block-name div{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+.block-name p{
+    padding: 15px;
+  }
+
+
+.name{
+  width: 150px;
+  padding: 15px;
+
+}
+
+.data-owner, .car-field{
+  border: 1px solid grey;
+  border-radius: 20px;
+  width: 260px;
+  background-color: rgba(255, 211, 3, 0.04);
+  padding: 15px;
+  font-size: 24px;
+  margin: 3px;
+}
+.car-field{
+  width: 230px;
+}
+
+.rem-car{
+  color: white;
+  background: red;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+}
+
+h2{
+  font-size: 32px;
+}
+
+.block-btn button{
+  margin: 10px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+.data-name {
+  display: flex;
+  flex-direction: column;
+}
+.data-name input{
+    margin: 10px;
+  }
+
+
+input.ng-touched.ng-invalid{
+  border: 2px solid red;
+}
+
+.block-cars{
+  display: flex;
+  flex-direction: column;
+}
+
+.cars{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.car{
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-block{
+  margin: 20px;
+}
+
+.btn-block button{
+  margin: 10px;
+}
+
+.btn-block button:first-child{
+  margin-right: 10rem;
+}
+
+.mat-body p, .mat-body-1 p, .mat-typography p {
+  margin: 3px;
+}
+.cars-row{
+  position: relative;
+}
+
+.name-block__pos{
+  position: relative;
+}
+.text-danger{
+  background-color: red;
+  color: white;
+  padding: 5px;
+  position: absolute;
+  top: 50px;
+  left: 25%;
+}
+.text-danger__car{
+  top: 50px;
+  left: 0;
+}
+
+.text-danger__carN{
+  left: 20%;
+}
+.text-danger__carM{
+  left: 45%;
+}
+.text-danger__carY{
+  left: 70%;
+}

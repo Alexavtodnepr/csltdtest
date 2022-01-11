@@ -1,0 +1,56 @@
+<div class="btn-block">
+  <button mat-raised-button
+          (click)="createOwner()"
+          [disabled]="selectedOwner.length != 0"
+  >Добавить</button>
+  <button mat-raised-button
+          [disabled]="!selected && selectedOwner.length < 1"
+          (click)="viewOwner()"
+  >Просмотр</button>
+  <button mat-raised-button
+          [disabled]="!selected  && selectedOwner.length < 1"
+          (click)="editOwner()"
+  >Редактировать</button>
+  <button mat-raised-button
+          [disabled]="!selected && selectedOwner.length < 1"
+          (click)="deleteOwner()"
+  >Удалить</button>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="owners"
+  *ngIf="owners; else loader">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> LastName </th>
+      <td mat-cell *matCellDef="let owner"> {{owner.aLastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="middlename">
+      <th mat-header-cell *matHeaderCellDef> MiddleName </th>
+      <td mat-cell *matCellDef="let owner"> {{owner.aMiddleName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef> FirstName </th>
+      <td mat-cell *matCellDef="let owner"> {{owner.aFirstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cars">
+      <th mat-header-cell *matHeaderCellDef> Cars </th>
+      <td mat-cell *matCellDef="let owner"> {{owner.aCars.length}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        (click)="selectionThisRow(owner)"
+        [class.clicked-row]="selectedOwner.includes(owner)"
+        *matRowDef="let owner;
+        columns: displayedColumns;"></tr>
+  </table>
+</div>
+<ng-template #loader><mat-progress-bar mode="indeterminate"></mat-progress-bar></ng-template>
