@@ -1,7 +1,119 @@
+<ng-container *ngIf="edit || add; else view">
+  <div class="block-view">
+    <h2>Редактируем данные владельца</h2>
+    <form [formGroup]="form"
+          (ngSubmit)="submit()"
+          *ngIf="form; else loader">
+      <div class="block-name">
+        <div class="name-block__pos">
+          <label for="name" class="name firstname">Имя:</label>
+          <input id="name" type="text" class="data-owner"
+                 formControlName="aFirstName"
+                 placeholder="Введите Имя...">
+          <ng-container *ngIf="form.get('aFirstName')?.invalid && form.get('aFirstName')?.touched">
+            <small class="text-danger" *ngIf="form.get('aFirstName')?.errors?.['required']">Поле не может быть пустым!!!</small>
+            <small class="text-danger" *ngIf="form.get('aFirstName')?.errors?.['pattern']">Только буквы!!!</small>
+          </ng-container>
 
-<app-owner-edit *ngIf="edit"></app-owner-edit>
-<app-owner-add *ngIf="add"></app-owner-add>
-<app-owner-view *ngIf="view"></app-owner-view>
+        </div>
+        <div class="name-block__pos">
+          <label for="mname" class="name middlename">Отчество:</label>
+          <input id="mname" type="text" class="data-owner"
+                 formControlName="aMiddleName"
+                 placeholder="Введите Отчество...">
+          <ng-container *ngIf="form.get('aMiddleName')?.invalid && form.get('aMiddleName')?.touched">
+            <small class="text-danger" *ngIf="form.get('aMiddleName')?.errors?.['required']">Поле не может быть пустым!!!</small>
+            <small class="text-danger" *ngIf="form.get('aMiddleName')?.errors?.['pattern']">Только буквы!!!</small>
+          </ng-container>
+        </div>
+        <div class="name-block__pos">
+          <label for="lname" class="name lastname">Фамилия:</label>
+          <input id="lname" type="text" class="data-owner"
+                 formControlName="aLastName"
+                 placeholder="Введите Фамилию...">
+          <ng-container *ngIf="form.get('aLastName')?.invalid && form.get('aLastName')?.touched">
+            <small class="text-danger" *ngIf="form.get('aLastName')?.errors?.['required']">Поле не может быть пустым!!!</small>
+            <small class="text-danger" *ngIf="form.get('aLastName')?.errors?.['pattern']">Только буквы без пробелов!!!</small>
+          </ng-container>
+        </div>
+        <h2>Автомобили</h2>
+        <div class="cars" formArrayName="aCars">
+          <ng-container class="car"
+                        *ngFor="let carsForm of aCar.controls; let i = index">
+            <div class="cars-row" [formGroupName]="i">
+              <input type="text" placeholder="Пример AE9377II" class="car-field numberAuto" formControlName="carNumber">
+              <input type="text" placeholder="Пример Kia..." class="car-field brandAuto" formControlName="brand">
+              <input type="text" placeholder="Пример Rio..." class="car-field modelAuto" formControlName="model">
+              <input type="number" placeholder="1990-{{nowYear}}" min="1990" class="car-field yearAuto" formControlName="year">
+              <ng-container *ngIf="getCarRow(i).get('carNumber')?.touched && getCarRow(i).get('carNumber')?.invalid">
+                <small class="text-danger text-danger__car" *ngIf="getCarRow(i).get('carNumber')?.errors?.['required']">Поле с номером не может быть пустым!!!</small>
+                <small class="text-danger text-danger__car" *ngIf="getCarRow(i).get('carNumber')?.errors?.['pattern']">Пример номера AE9377II</small>
+                <small class="text-danger text-danger__car" *ngIf="getCarRow(i).get('carNumber')?.errors?.['carNumber']">Такой номер уже на другом авто</small>
+              </ng-container>
+              <ng-container *ngIf="getCarRow(i).get('brand')?.touched && getCarRow(i).get('brand')?.invalid">
+                <small class="text-danger text-danger__carN" *ngIf="getCarRow(i).get('brand')?.errors?.['pattern']">Только буквы!!!</small>
+                <small class="text-danger text-danger__carN" *ngIf="getCarRow(i).get('brand')?.errors?.['required']">Поле не может быть пустым!!!</small>
+              </ng-container>
+              <ng-container *ngIf="getCarRow(i).get('model')?.touched && getCarRow(i).get('model')?.invalid">
+                <small class="text-danger text-danger__carM" *ngIf="getCarRow(i).get('model')?.errors?.['required']">Поле не может быть пустым!!!</small>
+                <small class="text-danger text-danger__carM" *ngIf="getCarRow(i).get('model')?.errors?.['pattern']">Только буквы!!!</small>
+              </ng-container>
+              <ng-container *ngIf="getCarRow(i).get('year')?.touched && getCarRow(i).get('year')?.invalid">
+                <small class="text-danger text-danger__carY" *ngIf="getCarRow(i).get('year')?.errors?.['required']">Поле не может быть пустым!!!</small>
+                <small class="text-danger text-danger__carY" *ngIf="getCarRow(i).get('year')?.errors?.['max']">Год не более {{nowYear}}</small>
+                <small class="text-danger text-danger__carY" *ngIf="getCarRow(i).get('year')?.errors?.['min']">Год не менее 1990!!!</small>
+              </ng-container>
+              <button class="rem-car" type="button" (click)="removeCar(i)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" type="button"
+                [disabled]="form.invalid"
+                (click)="addNewCar()"
+        ><mat-icon>add_to_photos</mat-icon><span [matTooltip]="form.invalid ? 'Заполните все поля!!!' : ''"
+        >Добавить поле</span></button>
+
+        <button mat-button
+                type="submit"
+                style="border: 1px solid black; margin-left: 10px;"
+                [disabled]="form.invalid"
+        ><span [matTooltip]="form.invalid ? 'Заполните все поля!!!' : ''">Сохранить нового владельца</span></button>
+      </div>
+    </form>
+  </div>
+
+  <ng-template #loader><mat-progress-bar mode="indeterminate"></mat-progress-bar></ng-template>
+</ng-container>
+<!--<ng-container *ngIf="edit"><app-owner-edit></app-owner-edit></ng-container>-->
+<!--<ng-container *ngIf="add"><app-owner-add></app-owner-add></ng-container>-->
+
+
+
+
+<ng-template #view>
+  <h2>Просмотр владельца</h2>
+  <div class="view"
+       *ngIf="owner$; else loader"
+  >
+    <div class="block-name">
+      <div><p class="name lastname">Фамилия: </p><p class="data-owner">{{owner$.aLastName}}</p></div>
+      <div><p class="name middlename">Отчество: </p><p class="data-owner">{{owner$.aMiddleName}}</p></div>
+      <div><p class="name firstname">Имя: </p><p class="data-owner">{{owner$.aFirstName}}</p></div>
+    </div>
+    <div class="block-cars">
+      <h2>Автомобили</h2>
+      <div class="car" *ngFor="let car of owner$.aCars">
+        <p class="car-field numberAuto">{{car.carNumber}}</p>
+        <p class="car-field brandAuto">{{car.brand}}</p>
+        <p class="car-field modelAuto">{{car.model}}</p>
+        <p class="car-field yearAuto">{{car.year}}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #loader><mat-progress-bar mode="indeterminate"></mat-progress-bar></ng-template>
+</ng-template>
 
 <button mat-raised-button color="primary"
         [routerLink]="['/']"><mat-icon>arrow_back_ios</mat-icon>Назад</button>
