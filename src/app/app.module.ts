@@ -14,9 +14,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OwnerPageComponent} from "./components/owner-page/owner-page.component";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { OwnerEditComponent } from './components/owner-edit/owner-edit.component';
-import { OwnerViewComponent } from './components/owner-view/owner-view.component';
-import { OwnerAddComponent } from './components/owner-add/owner-add.component';
+import { OwnerEditComponent } from './components/owner-page/owner-edit/owner-edit.component';
+import { OwnerViewComponent } from './components/owner-page/owner-view/owner-view.component';
+import { OwnerAddComponent } from './components/owner-page/owner-add/owner-add.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 

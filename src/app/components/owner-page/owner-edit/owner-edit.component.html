@@ -9,10 +9,10 @@
         <input id="name" type="text" class="data-owner"
                formControlName="aFirstName"
                placeholder="Введите Имя...">
-        <div *ngIf="formEdit.get('aFirstName')?.invalid && formEdit.get('aFirstName')?.touched">
+        <ng-container *ngIf="formEdit.get('aFirstName')?.invalid && formEdit.get('aFirstName')?.touched">
           <small class="text-danger" *ngIf="formEdit.get('aFirstName')?.errors?.['required']">Поле не может быть пустым!!!</small>
           <small class="text-danger" *ngIf="formEdit.get('aFirstName')?.errors?.['pattern']">Только буквы!!!</small>
-        </div>
+        </ng-container>
 
       </div>
       <div class="name-block__pos">
@@ -20,20 +20,20 @@
         <input id="mname" type="text" class="data-owner"
                formControlName="aMiddleName"
                placeholder="Введите Отчество...">
-        <div *ngIf="formEdit.get('aMiddleName')?.invalid && formEdit.get('aMiddleName')?.touched">
+        <ng-container *ngIf="formEdit.get('aMiddleName')?.invalid && formEdit.get('aMiddleName')?.touched">
           <small class="text-danger" *ngIf="formEdit.get('aMiddleName')?.errors?.['required']">Поле не может быть пустым!!!</small>
           <small class="text-danger" *ngIf="formEdit.get('aMiddleName')?.errors?.['pattern']">Только буквы!!!</small>
-        </div>
+        </ng-container>
       </div>
       <div class="name-block__pos">
         <label for="lname" class="name lastname">Фамилия:</label>
         <input id="lname" type="text" class="data-owner"
                formControlName="aLastName"
                placeholder="Введите Фамилию...">
-        <div *ngIf="formEdit.get('aLastName')?.invalid && formEdit.get('aLastName')?.touched">
+        <ng-container *ngIf="formEdit.get('aLastName')?.invalid && formEdit.get('aLastName')?.touched">
           <small class="text-danger" *ngIf="formEdit.get('aLastName')?.errors?.['required']">Поле не может быть пустым!!!</small>
           <small class="text-danger" *ngIf="formEdit.get('aLastName')?.errors?.['pattern']">Только буквы без пробелов!!!</small>
-        </div>
+        </ng-container>
       </div>
       <h2>Автомобили</h2>
       <div class="cars" formArrayName="aCars">
@@ -44,24 +44,24 @@
             <input type="text" placeholder="Пример Kia..." class="car-field brandAuto" formControlName="brand">
             <input type="text" placeholder="Пример Rio..." class="car-field modelAuto" formControlName="model">
             <input type="number" placeholder="1990-{{nowYear}}" min="1990" class="car-field yearAuto" formControlName="year">
-            <div *ngIf="getCarRow(i).get('carNumber')?.touched && getCarRow(i).get('carNumber')?.invalid">
+            <ng-container *ngIf="getCarRow(i).get('carNumber')?.touched && getCarRow(i).get('carNumber')?.invalid">
               <small class="text-danger text-danger__car" *ngIf="getCarRow(i).get('carNumber')?.errors?.['required']">Поле с номером не может быть пустым!!!</small>
               <small class="text-danger text-danger__car" *ngIf="getCarRow(i).get('carNumber')?.errors?.['pattern']">Пример номера AE9377II</small>
               <small class="text-danger text-danger__car" *ngIf="getCarRow(i).get('carNumber')?.errors?.['carNumber']">Такой номер уже на другом авто</small>
-            </div>
-            <div *ngIf="getCarRow(i).get('brand')?.touched && getCarRow(i).get('brand')?.invalid">
+            </ng-container>
+            <ng-container *ngIf="getCarRow(i).get('brand')?.touched && getCarRow(i).get('brand')?.invalid">
               <small class="text-danger text-danger__carN" *ngIf="getCarRow(i).get('brand')?.errors?.['pattern']">Только буквы!!!</small>
               <small class="text-danger text-danger__carN" *ngIf="getCarRow(i).get('brand')?.errors?.['required']">Поле не может быть пустым!!!</small>
-            </div>
-            <div *ngIf="getCarRow(i).get('model')?.touched && getCarRow(i).get('model')?.invalid">
+            </ng-container>
+            <ng-container *ngIf="getCarRow(i).get('model')?.touched && getCarRow(i).get('model')?.invalid">
               <small class="text-danger text-danger__carM" *ngIf="getCarRow(i).get('model')?.errors?.['required']">Поле не может быть пустым!!!</small>
               <small class="text-danger text-danger__carM" *ngIf="getCarRow(i).get('model')?.errors?.['pattern']">Только буквы!!!</small>
-            </div>
-            <div *ngIf="getCarRow(i).get('year')?.touched && getCarRow(i).get('year')?.invalid">
+            </ng-container>
+            <ng-container *ngIf="getCarRow(i).get('year')?.touched && getCarRow(i).get('year')?.invalid">
               <small class="text-danger text-danger__carY" *ngIf="getCarRow(i).get('year')?.errors?.['required']">Поле не может быть пустым!!!</small>
               <small class="text-danger text-danger__carY" *ngIf="getCarRow(i).get('year')?.errors?.['max']">Год не более {{nowYear}}</small>
               <small class="text-danger text-danger__carY" *ngIf="getCarRow(i).get('year')?.errors?.['min']">Год не менее 1990!!!</small>
-            </div>
+            </ng-container>
             <button class="rem-car" type="button" (click)="removeCar(i)"><mat-icon>delete</mat-icon></button>
           </div>
         </ng-container>

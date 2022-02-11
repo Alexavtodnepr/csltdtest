@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {OwnerService} from "../../shared/owner.service";
+import {OwnerService} from "../../../shared/owner.service";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {OwnerEntity} from "../../shared/interfaces";
+import {OwnerEntity} from "../../../shared/interfaces";
 
 @Component({
   selector: 'app-owner-view',

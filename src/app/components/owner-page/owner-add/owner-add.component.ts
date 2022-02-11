@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {OwnerService} from "../../shared/owner.service";
+import {OwnerService} from "../../../shared/owner.service";
 import {Router} from "@angular/router";
-import {CarNumberValidator} from "../../shared/validators/car-number.validator";
+import {CarNumberValidator} from "../../../shared/validators/car-number.validator";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Subscription} from "rxjs";
 
