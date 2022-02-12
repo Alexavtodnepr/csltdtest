@@ -66,12 +66,6 @@ export class OwnerPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if(this.querySub){
-      this.querySub.unsubscribe();
-    }
-  }
-
   submit() {
     if(this.edit){
       const owner = this.form.value;
@@ -132,4 +126,13 @@ export class OwnerPageComponent implements OnInit, OnDestroy {
       year: ['', [Validators.required, Validators.min(1990), Validators.max((new Date()).getFullYear())]],
     }));
   };
+
+  ngOnDestroy() {
+    if(this.querySub){
+      this.querySub.unsubscribe();
+    }
+    if(this.submSub){
+      this.submSub.unsubscribe();
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <ng-container *ngIf="edit || add; else view">
   <div class="block-view">
-    <h2>Редактируем данные владельца</h2>
+    <h2>{{edit?'Редактируем данные владельца': 'Добавляем нового владельца'}}</h2>
     <form [formGroup]="form"
           (ngSubmit)="submit()"
           *ngIf="form; else loader">
