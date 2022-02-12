@@ -137,6 +137,7 @@ input.ng-touched.ng-invalid{
 }
 .cars-row{
   position: relative;
+  display: flex;
 }
 
 .name-block__pos{
@@ -163,4 +164,26 @@ input.ng-touched.ng-invalid{
 }
 .text-danger__carY{
   left: 70%;
+}
+
+@media screen  and (max-width: 1200px){
+  .cars-row{
+    flex-wrap: wrap;
+    border: 1px dotted grey;
+    border-radius: 20px;
+  }
+  .block-name{
+    width: 100%;
+  }
+}
+
+@media screen  and (max-width: 520px){
+  .block-name div{
+    flex-direction: column;
+  }
+  .cars-row{
+    background-color: rgba(190, 0, 253, 0.1);
+  }
+
+
 }

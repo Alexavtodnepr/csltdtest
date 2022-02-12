@@ -78,7 +78,7 @@
         <button mat-button
                 type="submit"
                 style="border: 1px solid black; margin-left: 10px;"
-                [disabled]="form.invalid"
+                [disabled]="form.invalid || form.pristine"
         ><span [matTooltip]="form.invalid ? 'Заполните все поля!!!' : ''">Сохранить нового владельца</span></button>
       </div>
     </form>
@@ -86,11 +86,6 @@
 
   <ng-template #loader><mat-progress-bar mode="indeterminate"></mat-progress-bar></ng-template>
 </ng-container>
-<!--<ng-container *ngIf="edit"><app-owner-edit></app-owner-edit></ng-container>-->
-<!--<ng-container *ngIf="add"><app-owner-add></app-owner-add></ng-container>-->
-
-
-
 
 <ng-template #view>
   <h2>Просмотр владельца</h2>
