@@ -79,7 +79,7 @@
                 type="submit"
                 style="border: 1px solid black; margin-left: 10px;"
                 [disabled]="form.invalid || form.pristine"
-        ><span [matTooltip]="form.invalid ? 'Заполните все поля!!!' : ''">Сохранить нового владельца</span></button>
+        ><span [matTooltip]="form.invalid ? 'Заполните или исправьте все поля!!!' : ''">Сохранить нового владельца</span></button>
       </div>
     </form>
   </div>
@@ -99,7 +99,7 @@
     </div>
     <div class="block-cars">
       <h2>Автомобили</h2>
-      <div class="car" *ngFor="let car of owner$.aCars">
+      <div class="car cars-row" *ngFor="let car of owner$.aCars">
         <p class="car-field numberAuto">{{car.carNumber}}</p>
         <p class="car-field brandAuto">{{car.brand}}</p>
         <p class="car-field modelAuto">{{car.model}}</p>

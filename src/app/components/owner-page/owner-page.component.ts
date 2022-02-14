@@ -17,6 +17,7 @@ export class OwnerPageComponent implements OnInit, OnDestroy {
   view: boolean = false;
   edit: boolean = false;
   add: boolean = false;
+  carNum: string = '';
   nowYear = (new Date()).getFullYear();
   id: string = '';
   owner$?: OwnerEntity;
@@ -80,7 +81,6 @@ export class OwnerPageComponent implements OnInit, OnDestroy {
       const aLastName = this.form.value.aLastName;
       const aCars = this.aCar.value;
       this.submSub = this.ownerService.createOwner(aFirstName, aMiddleName, aLastName, aCars).subscribe((owner)=>{
-        this.form.reset();
         this.router.navigate(['/']);
         this.matSnack.open(`Владелец ${owner.aFirstName + ' ' + owner.aLastName} был создан!!`, 'Ok', {duration: 5000});
       });
@@ -109,7 +109,7 @@ export class OwnerPageComponent implements OnInit, OnDestroy {
   setCar(){
     this.formArray.forEach(car => {
       const ownerCar = this.fb.group({
-        carNumber: [car.carNumber, [Validators.required, Validators.pattern('[A-Z]{2}[0-9]{4}[A-Z]{2}')], [CarNumberValidator(this.ownerService, car.carNumber)]],
+        carNumber: [car.carNumber, [Validators.required, Validators.pattern('[A-Z]{2}[0-9]{4}[A-Z]{2}')], [CarNumberValidator(this.ownerService, car.carNumber, this.aCar)]],
         brand: [car.brand, [Validators.required, Validators.pattern('^[а-яА-Яa-zA-Z]+$')]],
         model: [car.model, [Validators.required, Validators.pattern('^[а-яА-Яa-zA-Z]+$')]],
         year: [car.year, [Validators.required, Validators.min(1990), Validators.max(this.nowYear)]],
@@ -120,10 +120,10 @@ export class OwnerPageComponent implements OnInit, OnDestroy {
 
   addNewCar(){
     this.aCar.push(this.fb.group({
-      carNumber: ['', [Validators.required, Validators.pattern('[A-Z]{2}[0-9]{4}[A-Z]{2}')], [CarNumberValidator(this.ownerService)]],
+      carNumber: ['', [Validators.required, Validators.pattern('[A-Z]{2}[0-9]{4}[A-Z]{2}')], [CarNumberValidator(this.ownerService, '',this.aCar)]],
       brand: ['', Validators.required],
       model: ['', Validators.required],
-      year: ['', [Validators.required, Validators.min(1990), Validators.max((new Date()).getFullYear())]],
+      year: ['', [Validators.required, Validators.min(1990), Validators.max(this.nowYear)]],
     }));
   };
 

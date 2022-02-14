@@ -1,11 +1,16 @@
 import {OwnerService} from "../owner.service";
-import {AbstractControl, AsyncValidatorFn, ValidationErrors} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, FormArray, ValidationErrors} from "@angular/forms";
 import {map, Observable} from "rxjs";
 import {OwnerEntity} from "../interfaces";
 
-export function CarNumberValidator(ownerService: OwnerService, carNum?: any): AsyncValidatorFn{
+export function CarNumberValidator(ownerService: OwnerService, carNum?: any, car?: FormArray): AsyncValidatorFn{
   return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null>=> {
     let carNumber: string[] = [];
+    if(car !== undefined){
+      car.value.map((car:any) =>{
+        carNumber.push(car.carNumber);
+      });
+    }
     let value: string = control.value;
     return ownerService.getOwners()
       .pipe(
@@ -14,7 +19,7 @@ export function CarNumberValidator(ownerService: OwnerService, carNum?: any): As
             return null;
           }
         owners.map( owner => owner.aCars.map(car=> carNumber.push(car.carNumber)));
-          return carNumber.includes(value) ? {carNumber: true} : null;
+          return carNumber.includes(value)? {carNumber: true} : null;
         })
       )
   }

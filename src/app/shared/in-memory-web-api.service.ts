@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {OwnerEntity} from "./interfaces";
 import {Observable} from "rxjs";
 import {InMemoryDbService} from "angular-in-memory-web-api";
 
@@ -50,8 +49,4 @@ export class InMemoryWebApiService implements InMemoryDbService{
     return {owners};
   }
 
-  // genId(owner: any): number{
-  //   // @ts-ignore
-  //   return owner.length > 0 ? Math.max(...owner.map<number>(owner => +owner.id)) + 1 : 11;
-  // }
 }
