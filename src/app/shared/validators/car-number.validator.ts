@@ -1,13 +1,13 @@
 import {OwnerService} from "../owner.service";
 import {AbstractControl, AsyncValidatorFn, FormArray, ValidationErrors} from "@angular/forms";
 import {map, Observable} from "rxjs";
-import {OwnerEntity} from "../interfaces";
+import {CarEntity, OwnerEntity} from "../interfaces";
 
-export function CarNumberValidator(ownerService: OwnerService, carNum?: any, car?: FormArray): AsyncValidatorFn{
+export function CarNumberValidator(ownerService: OwnerService, carNum?: string, car?: FormArray): AsyncValidatorFn{
   return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null>=> {
     let carNumber: string[] = [];
     if(car !== undefined){
-      car.value.map((car:any) =>{
+      car.value.map((car: CarEntity) =>{
         carNumber.push(car.carNumber);
       });
     }
